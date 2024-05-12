@@ -39,6 +39,11 @@ function shuffle ( array )
   {
     //random number in range arraygit
     random = Math.floor(Math.random() * current)
+    
     current--;
   }
 }
+document.addEventListener( "DOMContentLoaded", () =>
+{
+  document.querySelector(".loading").remove()
+})
