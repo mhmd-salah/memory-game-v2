@@ -55,16 +55,13 @@ function flipBlock (selectedBlock)
   if ( allFlippedBlocks.length == 2 )
   {
     log(allFlippedBlocks)
-    //stop clicking function
-  
+    //stop clicking functino
+    stopClicking();
     //check matched block function
-    
+
   }
 
 }
-
-
-
 
 
 // function shuffle ( array )
@@ -88,4 +85,26 @@ function flipBlock (selectedBlock)
 function shuffle ( array )
 {
   return array.sort(()=> Math.random() - 0.5)
+}
+
+//stop clicking function
+function stopClicking ()
+{
+  //add class no clicking on main container
+  blocksContainer.classList.add( "no-clicking" )
+  setTimeout( () =>
+  {
+    blocksContainer.classList.remove("no-clicking")
+  },duration)
+  
+}
+
+//check matched blocks function
+function checkMathcedBlocks (firsBlock,secondBlock)
+{
+
+
+  
+
+
 }
