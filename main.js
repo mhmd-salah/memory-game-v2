@@ -1,4 +1,12 @@
 let log = console.log
+
+// loder 
+document.addEventListener( "DOMContentLoaded", () =>
+{
+  document.querySelector(".loading").remove()
+} );
+
+// start game button
 document.querySelector( ".control-buttons span" ).onclick = function (e)
 {
   let userName = prompt( "What's Your Name : " )
@@ -22,7 +30,8 @@ let blocksContainer = document.querySelector( ".memory-game-blocks" );
 let blocks = Array.from( blocksContainer.children )
 
 let orderRange = [ ...Array( blocks.length ).keys() ];
-
+shuffle( orderRange )
+log(orderRange)
 //add order css property to game blocks
 
 blocks.forEach( (block , index) =>
@@ -40,10 +49,13 @@ function shuffle ( array )
     //random number in range arraygit
     random = Math.floor(Math.random() * current)
     
+
     current--;
   }
 }
-document.addEventListener( "DOMContentLoaded", () =>
-{
-  document.querySelector(".loading").remove()
-})
+
+// function shuffle ( array )
+// {
+//   return array.sort(()=>Math.random() - 0.5)
+// }
+
