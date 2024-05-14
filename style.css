@@ -15,17 +15,50 @@ body{
   z-index: 2;
   background-color: rgb(33 150 243 / 92%);
   transition: .5s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 .control-buttons.hidden{
   height: 0;
   opacity: 0;
   z-index: -111;
 }
-.control-buttons span {
+.control-buttons .rates{
+  justify-content: start;
+  width: 50%;
+  /* height: 50px; */
+  padding: 20px;
+  font-size: 20px;
+  background-color: #f9f9f9;
+  border-radius: 4px;
   position: absolute;
+  top: 0;
+  margin-top: 30px;
+  overflow: auto;
+  max-height: 370px;
+  scrollbar-width: 0;
+  scrollbar-color: white;
+}
+.control-buttons #username{
+  margin-bottom: 20px;
+  padding: 8px 10px;
+  width: 280px;
+  border-radius: 4px;
+  border: 3px solid #f44336;
+  outline: none;
+  font-size: 20px;
+  color: #f44336;
+}
+.control-buttons #username::placeholder{
+  color: #f4433690;
+}
+.control-buttons > span {
+  /* position: absolute;
   left: 50%;
-  top: 50%;
-  transform: translate(-50% , -50%);
+  top: 50%; */
+  /* transform: translate(-50% , -50%); */
   background-color: #f44336;
   color: white;
   padding: 15px 25px;
@@ -132,4 +165,34 @@ body{
 }
 @keyframes l1 {
     100% {background-position: right}
+}
+
+.winGame{
+  color: #2196F3;
+  font-size: 45px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width: 100%;
+  font-size: 10%;
+  height: 100%;
+  background-color: #f9f9f98f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 5px solid #2196F3;
+  border-radius:15px;
+  backdrop-filter: blur(7px);
+  display: none;
+  animation: animate .4s forwards;
+}
+@keyframes animate {
+  100%{
+    font-size: 200%;
+  }
+}
+.winGame.on{
+  display: flex;
+  text-align: center;
 }

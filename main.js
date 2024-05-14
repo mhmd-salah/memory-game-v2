@@ -6,10 +6,21 @@ document.addEventListener( "DOMContentLoaded", () =>
   document.querySelector( ".loading" ).remove();
 } );
 
+let usersRate;
+if ( window.localStorage.getItem( "rates" ) )
+{
+  usersRate = JSON.parse(window.localStorage.getItem("rates"))
+} else
+{
+  usersRate = []
+}
+
+
+let userName;
 // start game button
 document.querySelector( ".control-buttons span" ).onclick = function ( e )
 {
-  let userName = prompt( "What's Your Name : " );
+  userName = document.querySelector("#username").value
   if ( userName == null || userName == "" )
   {
     document.querySelector( ".name span" ).innerHTML = "Unknown";
@@ -20,6 +31,26 @@ document.querySelector( ".control-buttons span" ).onclick = function ( e )
   e.target.parentElement.classList.add( "hidden" );
   // e.target.parentElement.remove()
 };
+
+let ratesElement = document.querySelector( ".control-buttons .rates" )
+if ( localStorage.getItem("rates") == undefined )
+{
+  ratesElement.style.display="none"
+}
+for ( let i = 0; i < usersRate.length; i++ )
+{
+  let div = document.createElement( "div" )
+  div.className = "userInfo"
+  let markup = `
+  <span style="width:70px">${usersRate[i].username}</span>
+  <span style="width: 100px">Tries: ${usersRate[i].tries}</span>
+  <span style="width: 100px">Rate: ${usersRate[i].rate}</span>
+  `
+  div.innerHTML = markup
+  div.style.display= "flex"
+  div.style.justifyContent = "space-between"
+  ratesElement.appendChild(div)
+}
 
 //   |- start -|
 
@@ -59,10 +90,30 @@ function flipBlock ( selectedBlock )
     //check matched block function
     checkMathcedBlocks( allFlippedBlocks[ 0 ], allFlippedBlocks[ 1 ] );
   }
+  let blockHasMatched = blocks.filter(block => block.classList.contains("has-match"))
+  if ( blockHasMatched.length == blocksContainer.children.length ) // whene win - 1
+  {
+    createObjUser( userName, triesElement.innerHTML )
+    document.querySelector(".winGame").classList.add("on")
+  }
 
 }
 
-
+function createObjUser ( username, tries )
+{
+  let user = {
+    username: username || "UnKnown",
+    tries: tries,
+    rate : tries / 2
+  }
+  usersRate.push( user )
+  log( usersRate, "after create object for user and push in usersTate array" )
+  setRateInLocalStorage(usersRate)
+}
+function setRateInLocalStorage ( usersRate )
+{
+  window.localStorage.setItem("rates", JSON.stringify(usersRate))
+}
 // function shuffle ( array )
 // {
 //   let current = array.length,
@@ -97,13 +148,13 @@ function stopClicking ()
   }, duration );
 
 }
-
+let triesElement;
 //check matched blocks function
 function checkMathcedBlocks ( firsBlock, secondBlock )
 {
 
 
-  let triesElement = document.querySelector( ".tries span" );
+  triesElement = document.querySelector( ".tries span" );
 
   if ( firsBlock.dataset.thechnology === secondBlock.dataset.thechnology )
   {
