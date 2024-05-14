@@ -104,7 +104,22 @@ function checkMathcedBlocks (firsBlock,secondBlock)
 {
 
 
-  
+  let triesElement = document.querySelector(".tries span")
 
+  if ( firsBlock.dataset.technology === secondBlock.dataset.technology )
+  {
+    firsBlock.classList.remove("is-flipped")
+    secondBlock.classList.remove("is-flipped")
+
+    firsBlock.classList.add("has-match")
+    secondBlock.classList.add("has-match")
+
+  } else
+  {
+    triesElement.innerHTML = parseInt( triesElement ) + 1;
+
+    firsBlock.classList.remove("is-flipped")
+    secondBlock.classList.remove("is-flipped")
+  }
 
 }
