@@ -16,9 +16,10 @@
         <div class="control-buttons">
             <div class="rates">
 
+                <div class="clear">clear</div>
             </div>
             <div class="form">
-                <input type="text" name="username" id="username" placeholder="Enter your name ">
+                <input type="text" name="username" id="username" placeholder="Enter your name " autofocus>
             </div>
             <span>Start Game</span>
         </div>
@@ -28,6 +29,9 @@
 
             <div class="name">
                 hello: <span></span>
+            </div>
+            <div class="time">
+                time: <span class="min">00</span>:<span class="sac">00</span>
             </div>
             <div class="tries">
                 wrong tries: <span>0</span>
@@ -46,7 +50,7 @@
                     <img src="image/angular.png" alt="">
                 </div>
             </div>
-            <div class="game-block" data-thechnology="CSS3">
+            <!-- <div class="game-block" data-thechnology="CSS3">
                 <div class="front face"></div>
                 <div class="back face">
                     <img src="image/css.png" alt="">
@@ -58,7 +62,7 @@
                     <img src="image/css.png" alt="">
                 </div>
             </div>
-            <!-- <div class="game-block" data-thechnology="github">
+            <div class="game-block" data-thechnology="github">
                 <div class="front face"> </div>
                 <div class="back face">
                     <img src="image/github.png" alt="">
@@ -152,11 +156,12 @@
                 <div class="front face"> </div>
                 <div class="back face">
                     <img src="image/veujs.png" alt="">
-                </div> -->
-            </div>
+                </div>
+            </div> -->
         </div>
         <div class="winGame">
             <h1>Your Are Win ✨</h1>
+            <div class="btn">Play again</div>
         </div>
         <audio id="success" src="sound/seccess.mp3" preload="auto"></audio>
         <audio id="fail" src="sound/fail.mp3" preload="auto"></audio>

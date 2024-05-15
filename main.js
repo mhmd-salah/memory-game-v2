@@ -37,20 +37,27 @@ if ( localStorage.getItem("rates") == undefined )
 {
   ratesElement.style.display="none"
 }
+document.querySelector( ".rates .clear" ).onclick = () =>
+{
+  ratesElement.remove()
+  window.localStorage.removeItem("rates")
+  // usersRate = []
+}
 for ( let i = 0; i < usersRate.length; i++ )
 {
   let div = document.createElement( "div" )
   div.className = "userInfo"
   let markup = `
-  <span style="width:70px">${usersRate[i].username}</span>
+  <span style="width: 200px">${usersRate[i].username}</span>
   <span style="width: 100px">Tries: ${usersRate[i].tries}</span>
-  <span style="width: 100px">Rate: ${usersRate[i].rate}</span>
+  <span style="width: 110px">Rate: ${usersRate[i].rate}</span>
   `
   div.innerHTML = markup
   div.style.display= "flex"
   div.style.justifyContent = "space-between"
-  ratesElement.appendChild(div)
+  ratesElement.prepend(div)
 }
+
 
 //   |- start -|
 
@@ -94,20 +101,29 @@ function flipBlock ( selectedBlock )
   if ( blockHasMatched.length == blocksContainer.children.length ) // whene win - 1
   {
     createObjUser( userName, triesElement.innerHTML )
-    document.querySelector(".winGame").classList.add("on")
+    document.querySelector( ".winGame" ).classList.add( "on" )
+    let temp = 0
+    let x = setInterval( () =>
+    {
+      temp++
+      document.querySelector("#success").play()
+      if ( temp == 10 )
+      {
+        clearInterval( x )
+        document.querySelector('.winGame .btn').onclick()
+      }
+    },500)
   }
 
 }
-
 function createObjUser ( username, tries )
 {
   let user = {
     username: username || "UnKnown",
     tries: tries,
-    rate : tries / 2
+    rate : tries == 0 ? "100%" : tries / 2
   }
   usersRate.push( user )
-  log( usersRate, "after create object for user and push in usersTate array" )
   setRateInLocalStorage(usersRate)
 }
 function setRateInLocalStorage ( usersRate )
@@ -116,64 +132,67 @@ function setRateInLocalStorage ( usersRate )
 }
 // function shuffle ( array )
 // {
-//   let current = array.length,
-//     temp,
-//     random;
-//   while (current > 0)
-//   {
-//     //random number in range arraygit
-//     random = Math.floor(Math.random() * current)
-
-//     current--;
-//     temp = array[current]
-//     array[ current ] = array[ random ]
-//     array[ random ] = temp;
-//   }
-//   return array
-// }
-
-function shuffle ( array )
-{
-  return array.sort( () => Math.random() - 0.5 );
-}
-
-//stop clicking function
-function stopClicking ()
-{
-  //add class no clicking on main container
-  blocksContainer.classList.add( "no-clicking" );
-  setTimeout( () =>
-  {
+  //   let current = array.length,
+  //     temp,
+  //     random;
+  //   while (current > 0)
+    //   {
+      //     //random number in range arraygit
+      //     random = Math.floor(Math.random() * current)
+      
+      //     current--;
+      //     temp = array[current]
+      //     array[ current ] = array[ random ]
+      //     array[ random ] = temp;
+      //   }
+      //   return array
+      // }
+      
+      function shuffle ( array )
+      {
+        return array.sort( () => Math.random() - 0.5 );
+      }
+      
+      //stop clicking function
+      function stopClicking ()
+      {
+        //add class no clicking on main container
+        blocksContainer.classList.add( "no-clicking" );
+        setTimeout( () =>
+          {
     blocksContainer.classList.remove( "no-clicking" );
   }, duration );
-
+  
 }
 let triesElement;
 //check matched blocks function
 function checkMathcedBlocks ( firsBlock, secondBlock )
 {
-
-
+  
+  
   triesElement = document.querySelector( ".tries span" );
-
+  
   if ( firsBlock.dataset.thechnology === secondBlock.dataset.thechnology )
-  {
-    firsBlock.classList.remove( "is-flipped" );
-    secondBlock.classList.remove( "is-flipped" );
-
+    {
+      firsBlock.classList.remove( "is-flipped" );
+      secondBlock.classList.remove( "is-flipped" );
+      
     firsBlock.classList.add( "has-match" );
     secondBlock.classList.add( "has-match" );
     document.querySelector("#success").play()
-
+    
   } else
   { 
     triesElement.innerHTML = parseInt( triesElement.innerHTML ) + 1;
     document.querySelector("#fail").play()
     setTimeout( () =>
-    {
-      firsBlock.classList.remove( "is-flipped" );
-      secondBlock.classList.remove( "is-flipped" );
-    }, duration );
+      {
+        firsBlock.classList.remove( "is-flipped" );
+        secondBlock.classList.remove( "is-flipped" );
+      }, duration );
+    }
+    
   }
-
-}
+document.querySelector( ".winGame .btn" ).onclick = ()=>{
+    window.location = window.location
+  }
