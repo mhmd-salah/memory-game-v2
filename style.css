@@ -19,11 +19,13 @@ body{
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
 }
 .control-buttons.hidden{
-  height: 0;
+  /* height: 0; */
+  /* display: none; */
   opacity: 0;
-  z-index: -111;
+  z-index: -11;
 }
 .control-buttons .rates{
   justify-content: start;

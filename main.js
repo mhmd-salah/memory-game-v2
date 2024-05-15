@@ -16,8 +16,20 @@ if ( window.localStorage.getItem( "rates" ) )
 }
 
 
+
+  // log(document.innerHTML)
 let userName;
 // start game button
+
+document.querySelector( ".control-buttons" ).addEventListener( "keypress", (e) =>
+{
+  if ( e.code == "Enter" )
+  {
+    document.querySelector(".control-buttons > span").click()
+    log(e.code)
+  }
+} )
+
 document.querySelector( ".control-buttons span" ).onclick = function ( e )
 {
   userName = document.querySelector("#username").value
@@ -29,6 +41,7 @@ document.querySelector( ".control-buttons span" ).onclick = function ( e )
     document.querySelector( ".name span" ).innerHTML = userName;
   }
   e.target.parentElement.classList.add( "hidden" );
+  createObjUser( userName, document.querySelector( ".tries span" ).value = "-1" )
   // e.target.parentElement.remove()
 };
 
